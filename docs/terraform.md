@@ -19,6 +19,7 @@
 | tags | Additional tags (e.g. map(`Cluster`,`XYZ`) | map | `<map>` | no |
 | vpc_default_route_table_id | Default route table for public subnets. If not set, will be created. (e.g. `rtb-f4f0ce12`) | string | `` | no |
 | vpc_id | VPC ID where subnets will be created (e.g. `vpc-aceb2723`) | string | - | yes |
+| map_public_ip_on_launch | Assign public ip to instances on launch | string | `false` | no |
 
 ## Outputs
 

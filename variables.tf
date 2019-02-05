@@ -80,3 +80,8 @@ variable "nat_gateway_enabled" {
   description = "Flag to enable/disable NAT gateways for private subnets"
   default     = "true"
 }
+
+variable "map_public_ip_on_launch" {
+  description = "Flag to enable/disable assigning a public key to instances launched in this subnet"
+  default     = "false"
+}
