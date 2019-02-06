@@ -81,6 +81,11 @@ variable "nat_gateway_enabled" {
   default     = "true"
 }
 
+variable "nat_instance_id" {
+  description = "Id of the EC2 NAT instance"
+  default     = ""
+}
+
 variable "map_public_ip_on_launch" {
   description = "Flag to enable/disable assigning a public key to instances launched in this subnet"
   default     = "false"

@@ -9,6 +9,7 @@ module "nat_label" {
 
 locals {
   nat_gateways_count = "${var.nat_gateway_enabled == "true" ? length(var.availability_zones) : 0}"
+  nat_instance_count = "${var.nat_instance_id != "" ? length(var.availability_zones) : 0}"
 }
 
 resource "aws_eip" "default" {
@@ -36,6 +37,14 @@ resource "aws_route" "default" {
   count                  = "${local.nat_gateways_count}"
   route_table_id         = "${element(aws_route_table.private.*.id, count.index)}"
   nat_gateway_id         = "${element(aws_nat_gateway.default.*.id, count.index)}"
+  destination_cidr_block = "0.0.0.0/0"
+  depends_on             = ["aws_route_table.private"]
+}
+
+resource "aws_route" "default-nat_instance" {
+  count                  = "${local.nat_instance_count}"
+  route_table_id         = "${element(aws_route_table.private.*.id, count.index)}"
+  instance_id            = "${var.nat_instance_id}"
   destination_cidr_block = "0.0.0.0/0"
   depends_on             = ["aws_route_table.private"]
 }
